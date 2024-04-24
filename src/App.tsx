@@ -1,14 +1,14 @@
 import Header from "./components/Header/Header";
 
 import "./App.module.css";
-import Post from "./components/Post/Post";
+import AddTask from "./components/AddTask/AddTask";
 
 function App() {
   return(
     <>
       <Header />
 
-      <Post />
+      <AddTask />
     </>
   );
 }

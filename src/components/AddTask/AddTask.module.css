@@ -3,10 +3,16 @@
   align-items: center;
   flex-direction: column;
 
+  margin: 0 auto;
+
+  width: 736px;
+  
   .formComment {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
+
+    margin-top: -1.5rem;
 
     height: 54px;
     width: 736px;
@@ -21,7 +27,7 @@
       background-color: var(--gray-500);
 
       height: 100%;
-      width: 80%;
+      width: 85%;
     }
 
     button {
@@ -45,5 +51,30 @@
         top: 3px;
       }
     }
+  }
+
+  .infoTasks {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+   
+    width: 100%;
+
+    :nth-child(1) {
+      color: var(--blue);
+    }
+
+    :nth-child(2) {
+      color: var(--purple);
+    }
+
+  }
+
+
+  .listTasks {
+    
   }
 }

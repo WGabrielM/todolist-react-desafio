@@ -1,6 +1,6 @@
-import style from "./Post.module.css";
+import style from "./AddTask.module.css";
 
-export default function Post() {
+export default function AddTask() {
   return (
     <article className={style.todo}>
 
@@ -9,12 +9,12 @@ export default function Post() {
         <button>Create</button>
       </form>
 
-      <div>
+      <div className={style.infoTasks}>
         <span>Created tasks: 0</span>
         <span>Completed: 0</span>
       </div>
 
-      <div>
+      <div className={style.listTasks}>
         <h2>You don't have any tasks registered yet</h2>
       </div>
     </article>
