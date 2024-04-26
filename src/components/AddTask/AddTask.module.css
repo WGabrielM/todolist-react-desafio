@@ -6,7 +6,7 @@
   margin: 0 auto;
 
   width: 736px;
-  
+
   .formComment {
     display: flex;
     flex-wrap: nowrap;
@@ -57,24 +57,42 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    
+
     margin-top: 5rem;
     margin-bottom: 3rem;
-   
+
     width: 100%;
 
     :nth-child(1) {
+      display: flex;
       color: var(--blue);
+
+      p {
+        color: var(--gray-200);
+        border-radius: 10px;
+        background-color: var(--gray-400);
+
+        margin-left: 0.5rem;
+        padding-left: 0.7rem;
+
+        width: 2rem;
+      }
     }
 
     :nth-child(2) {
+      display: flex;
       color: var(--purple);
+
+      p {
+        color: var(--gray-200);
+        border-radius: 10px;
+        background-color: var(--gray-400);
+
+        margin-left: 0.5rem;
+        padding-left: 0.7rem;
+
+        width: 2rem;
+      }
     }
-
-  }
-
-
-  .listTasks {
-    
   }
 }

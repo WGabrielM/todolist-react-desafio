@@ -10,12 +10,8 @@ export default function AddTask() {
       </form>
 
       <div className={style.infoTasks}>
-        <span>Created tasks: 0</span>
-        <span>Completed: 0</span>
-      </div>
-
-      <div className={style.listTasks}>
-        <h2>You don't have any tasks registered yet</h2>
+        <span>Created tasks: <p>0</p></span>
+        <span>Completed: <p>0</p></span>
       </div>
     </article>
   );
