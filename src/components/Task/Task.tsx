@@ -1,8 +1,9 @@
 import { useState } from "react";
 import style from "./Task.module.css";
+import Post from "../Post/Post";
 
 export default function Task() {
-  const [have, setHave] = useState(true);
+  const [have] = useState(true);
   return (
     <>
       {have ? (

@@ -1,0 +1,36 @@
+.post {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 8px;
+    background-color: var(--gray-500);
+    
+    margin: 0 auto;
+    padding: 1.5rem;
+    
+    width: 736px;
+
+
+    input {
+        border: none;
+
+        color: var(--blue);
+
+        height: 24px;
+        width: 24px;
+    }
+    
+    
+    label {
+        
+        height: 40px;
+        width: 632px;
+        
+    }
+    
+    button {
+        background-color: var(--gray-400);
+
+    }
+}
