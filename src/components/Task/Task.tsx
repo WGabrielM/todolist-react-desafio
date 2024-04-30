@@ -2,12 +2,12 @@ import { useState } from "react";
 import style from "./Task.module.css";
 import Post from "../Post/Post";
 
-export default function Task() {
+export default function Task({ data }) {
   const [have] = useState(true);
   return (
     <>
       {have ? (
-       <Post />
+        <Post data={data} />
       ) : (
         <div className={style.task}>
           <div className={style.notRegistered}>
