@@ -5,13 +5,14 @@ import style from "./Post.module.css";
 
 interface Props {
   data: ITask;
-  removeTask: (id: number) => void;
-  toggleTaskStatus: ({ id, value }: { id: number; value: boolean }) => void;
+  // removeTask: (id: number) => void;
+  toggleTaskStatus: ({ id, status }: { id: number; status: boolean }) => void;
 }
 
-export default function Post({ data, toggleTaskStatus }: Props) {
+export default function Post({ data, toggleTaskStatus}: Props) {
+
   function handleTaskToggle() {
-    toggleTaskStatus({ id: data.id, value: !data.isChecked });
+    toggleTaskStatus({ id: data.id, status: !data.isChecked });
   }
 
   function handleRemove() {}
