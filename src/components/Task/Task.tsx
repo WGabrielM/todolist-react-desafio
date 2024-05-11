@@ -6,7 +6,7 @@ export default function Task() {
       <div className={style.notRegistered}>
         <img src="/src/assets/clipboard.svg" alt="" />
         <span>You don't have any tasks registered yet</span>
-        <p>Crie tarefas e organize seus itens a fazer</p>
+        <p>Create tasks and organize your to-do items</p>
       </div>
     </div>
   );

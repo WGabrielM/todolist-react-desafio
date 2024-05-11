@@ -1,3 +1,4 @@
+import { FormEvent, useState } from "react";
 import { ITask } from "../../App";
 import { Check, Trash } from "@phosphor-icons/react";
 
@@ -11,8 +12,14 @@ interface Props {
 
 export default function Post({ data, toggleTaskStatus}: Props) {
 
+  const [newTask, setNewTask] = useState('');
+
   function handleTaskToggle() {
     toggleTaskStatus({ id: data.id, status: !data.isChecked });
+  }
+
+  function handleNewTask(event: FormEvent) {
+    event.preventDefault();
   }
 
   function handleRemove() {}

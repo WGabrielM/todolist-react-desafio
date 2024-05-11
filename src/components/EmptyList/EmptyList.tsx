@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react";
-import style from "./AddTask.module.css";
+import style from "./EmptyList.module.css";
 
-export default function AddTask() {
+export default function EmptyList() {
   const [task, setTask] = useState(["Code"]);
   const [newTask, setNewTask] = useState("");
 

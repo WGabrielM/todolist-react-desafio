@@ -3,7 +3,7 @@ import { useState } from "react";
 import Post from "./components/Post/Post";
 import Task from "./components/Task/Task";
 import Header from "./components/Header/Header";
-import AddTask from "./components/AddTask/AddTask";
+import EmptyList from "./components/EmptyList/EmptyList";
 
 import "./App.module.css";
 
@@ -12,8 +12,6 @@ export interface ITask {
   text: string;
   isChecked: boolean;
 }
-
-
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -32,7 +30,7 @@ function App() {
   return (
     <>
       <Header />
-      <AddTask />
+      <EmptyList />
       {tasks.length > 0 ? (
         tasks.map((task) => {
           <Post data={task} toggleTaskStatus={handleToggleTask} />;
