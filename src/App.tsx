@@ -1,7 +1,7 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 import Post from "./components/Post/Post";
-import Task from "./components/Task/Task";
+import EmptyTask from "./components/EmptyTask/EmptyTask";
 import Header from "./components/Header/Header";
 
 import style from "./App.module.css";
@@ -30,10 +30,15 @@ function App() {
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
-    setTask([...task, newTask])
-    setNewTask("")
+    setTask([...task, newTask]);
+    setNewTask("");
   }
-  console.log(handleCreateNewTask);
+
+  function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    setNewTask(event.target.value);
+  }
+
+  const isNewTaskEmpty = newTask.length === 0;
 
   return (
     <>
@@ -41,8 +46,16 @@ function App() {
 
       <article className={style.todo}>
         <form onSubmit={handleCreateNewTask} className={style.formComment}>
-          <textarea name="task" value={newTask} placeholder="Add a new task" />
-          <button>Create</button>
+          <textarea
+            name="task"
+            value={newTask}
+            onChange={handleNewTaskChange}
+            placeholder="Add a new task"
+            required
+          />
+          <button type="submit" disabled={isNewTaskEmpty}>
+            Create
+          </button>
         </form>
 
         <div className={style.infoTasks}>
@@ -60,7 +73,7 @@ function App() {
           <Post data={task} toggleTaskStatus={handleToggleTask} />;
         })
       ) : (
-        <Task />
+        <EmptyTask />
       )}
     </>
   );
