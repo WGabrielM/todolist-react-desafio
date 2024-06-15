@@ -1,38 +1,32 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-import Post from "./components/Post/Post";
+import Post, { PostType } from "./components/Post/Post";
 import EmptyTask from "./components/EmptyTask/EmptyTask";
 import Header from "./components/Header/Header";
 
 import style from "./App.module.css";
 
-export interface ITask {
-  id: number;
-  text: string;
-  isChecked: boolean;
-}
+const tasks: PostType[] = [
+  {
+    id: 1,
+    status: false,
+    text: "Study React until i get really really better",
+  },
+  {
+    id: 2,
+    status: false,
+    text: "Learn NodeJS until i be a good backe end Node",
+  },
+];
 
 function App() {
-  const [tasks, setTasks] = useState<ITask[]>([]);
-  const [task, setTask] = useState(["Code"]);
   const [newTask, setNewTask] = useState("");
 
-  function handleToggleTask({ id, status }: { id: number; status: boolean }) {
-    const changeTasks = tasks.map((task) => {
-      if (task.id == id) {
-        return { ...task, isChecked: status };
-      }
-
-      return { ...task };
-    });
-    setTasks(changeTasks);
-  }
-
-  function handleCreateNewTask(event: FormEvent) {
-    event.preventDefault();
-    setTask([...task, newTask]);
-    setNewTask("");
-  }
+  // function handleCreateNewTask(event: FormEvent) {
+  //   event.preventDefault();
+  //   setTask([...task, newTask]);
+  //   setNewTask("");
+  // }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setNewTask(event.target.value);
@@ -45,7 +39,7 @@ function App() {
       <Header />
 
       <article className={style.todo}>
-        <form onSubmit={handleCreateNewTask} className={style.formComment}>
+        <form className={style.formComment}>
           <textarea
             name="task"
             value={newTask}
@@ -68,9 +62,9 @@ function App() {
         </div>
       </article>
 
-      {tasks.length > 0 ? (
-        tasks.map((task) => {
-          <Post data={task} toggleTaskStatus={handleToggleTask} />;
+      {tasks.length > 1 ? (
+        tasks.map((data) => {
+          return <Post id={data.id} status={data.status} text={data.text} />;
         })
       ) : (
         <EmptyTask />

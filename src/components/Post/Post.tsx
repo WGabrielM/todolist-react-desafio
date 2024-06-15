@@ -1,22 +1,17 @@
-import { FormEvent, useState } from "react";
-import { ITask } from "../../App";
+import { FormEvent } from "react";
 import { Check, Trash } from "@phosphor-icons/react";
 
 import style from "./Post.module.css";
 
-interface Props {
-  data: ITask;
-  // removeTask: (id: number) => void;
-  toggleTaskStatus: ({ id, status }: { id: number; status: boolean }) => void;
+export interface PostType {
+  id: number;
+  status: boolean;
+  text: string;
 }
 
-export default function Post({ data, toggleTaskStatus}: Props) {
+export default function Post({ id, status, text }: PostType) {
 
-  const [newTask, setNewTask] = useState('');
-
-  function handleTaskToggle() {
-    toggleTaskStatus({ id: data.id, status: !data.isChecked });
-  }
+  function handleTaskToggle() {}
 
   function handleNewTask(event: FormEvent) {
     event.preventDefault();
@@ -24,24 +19,21 @@ export default function Post({ data, toggleTaskStatus}: Props) {
 
   function handleRemove() {}
 
-  const checkboxCheckedClassname = data.isChecked
+  const checkboxCheckedClassname = status
     ? style["checkbox-checked"]
     : style["checkbox-unchecked"];
 
-  const paragraphCheckedClassname = data.isChecked ? style["text-checked"] : "";
+  const paragraphCheckedClassname = status ? style["text-checked"] : "";
 
   return (
     <div className={style.post}>
       <label htmlFor="checkbox" onClick={handleTaskToggle}>
         <input readOnly type="checkbox" />
         <span className={`${style.checkbox} ${checkboxCheckedClassname}`}>
-          {data.isChecked && <Check size={12} />}
+          {status && <Check size={12} />}
         </span>
 
-        <p className={`${style.text} ${paragraphCheckedClassname}`}>
-          Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames integer.
-        </p>
+        <p className={`${style.text} ${paragraphCheckedClassname}`}>{text}</p>
       </label>
 
       <button onClick={handleRemove} title="Delete Task">
