@@ -4,18 +4,13 @@ import { Check, Trash } from "@phosphor-icons/react";
 import style from "./Post.module.css";
 
 export interface PostType {
-  id: number;
-  status: boolean;
   text: string;
+  status: boolean;
 }
 
-export default function Post({ id, status, text }: PostType) {
+export default function Post({ status, text }: PostType) {
 
   function handleTaskToggle() {}
-
-  function handleNewTask(event: FormEvent) {
-    event.preventDefault();
-  }
 
   function handleRemove() {}
 

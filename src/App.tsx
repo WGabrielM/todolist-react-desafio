@@ -1,48 +1,48 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
-import Post, { PostType } from "./components/Post/Post";
-import EmptyTask from "./components/EmptyTask/EmptyTask";
 import Header from "./components/Header/Header";
+import Post from "./components/Post/Post";
+import EmptyTask from "./components/EmptyTask/EmptyTask";
 
 import style from "./App.module.css";
 
-const tasks: PostType[] = [
-  {
-    id: 1,
-    status: false,
-    text: "Study React until i get really really better",
-  },
-  {
-    id: 2,
-    status: false,
-    text: "Learn NodeJS until i be a good backe end Node",
-  },
-];
+export interface MyTaskData {
+  id: number;
+  text: string;
+  status: boolean;
+}
 
 function App() {
-  const [newTask, setNewTask] = useState("");
+  const [tasks, setTasks] = useState<MyTaskData[]>([]);
+  const [value, setValue] = useState("");
 
-  // function handleCreateNewTask(event: FormEvent) {
-  //   event.preventDefault();
-  //   setTask([...task, newTask]);
-  //   setNewTask("");
-  // }
+  function handleCreateNewTask(event: FormEvent) {
+    event.preventDefault();
+    const newTask: MyTaskData = {
+      id: new Date().getTime(),
+      text: value,
+      status: false,
+    };
 
-  function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
-    setNewTask(event.target.value);
+    setTasks((state) => [...state, newTask]);
+    setValue("");
   }
 
-  const isNewTaskEmpty = newTask.length === 0;
+  function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    setValue(event.target.value);
+  }
+
+  const isNewTaskEmpty = value.length === 0;
 
   return (
     <>
       <Header />
 
       <article className={style.todo}>
-        <form className={style.formComment}>
+        <form onSubmit={handleCreateNewTask} className={style.formComment}>
           <textarea
             name="task"
-            value={newTask}
+            value={value}
             onChange={handleNewTaskChange}
             placeholder="Add a new task"
             required
@@ -62,10 +62,13 @@ function App() {
         </div>
       </article>
 
-      {tasks.length > 1 ? (
-        tasks.map((data) => {
-          return <Post id={data.id} status={data.status} text={data.text} />;
-        })
+      {tasks.length > 0 ? (
+        <div>
+          {tasks.map((task) => {
+            console.log(task);
+            return <Post key={task.id} status={task.status} text={task.text} />;
+          })}
+        </div>
       ) : (
         <EmptyTask />
       )}
