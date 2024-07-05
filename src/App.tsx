@@ -17,7 +17,9 @@ function App() {
   const [value, setValue] = useState("");
 
   function handleCreateNewTask(event: FormEvent) {
+    
     event.preventDefault();
+
     const newTask: MyTaskData = {
       id: new Date().getTime(),
       text: value,
@@ -30,6 +32,16 @@ function App() {
 
   function handleNewTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setValue(event.target.value);
+  }
+
+  function handleRemoveTask(id: number) {
+    const filteredTasks = tasks.filter((task) => task.id !== id)
+
+    if (!confirm('Are you sure you want delete this task?')) {
+      return
+    }
+
+    setTasks(filteredTasks)
   }
 
   const isNewTaskEmpty = value.length === 0;
@@ -66,7 +78,7 @@ function App() {
       {tasks.length > 0 ? (
         <div>
           {tasks.map((task) => {
-            return <Post key={task.id} status={task.status} text={task.text} />;
+            return <Post key={task.id} id={task.id} status={task.status} text={task.text} removeTask={handleRemoveTask} />;
           })}
         </div>
       ) : (

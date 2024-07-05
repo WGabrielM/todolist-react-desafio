@@ -4,18 +4,22 @@ import style from "./Post.module.css";
 import { useState } from "react";
 
 export interface PostType {
+  id: number;
   text: string;
   status: boolean;
+  removeTask: (id: number) => void;
 }
 
-export default function Post({ status, text }: PostType) {
+export default function Post({ id, status, text, removeTask }: PostType) {
   const [check, setCheck] = useState(status);
 
   function handleTaskToggle() {
     setCheck(!check)
   }
 
-  function handleRemove() {}
+  function handleRemoveTask() {
+    removeTask(id)
+  }
 
   const checkboxCheckedClassname = check
     ? style["checkbox-checked"]
@@ -34,7 +38,7 @@ export default function Post({ status, text }: PostType) {
         <p className={`${style.text} ${paragraphCheckedClassname}`}>{text}</p>
       </label>
 
-      <button onClick={handleRemove} title="Delete Task">
+      <button onClick={handleRemoveTask} title="Delete Task">
         <Trash size={16} color="#808080" />
       </button>
     </div>
