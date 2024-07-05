@@ -36,6 +36,7 @@ function App() {
 
   return (
     <>
+
       <Header />
 
       <article className={style.todo}>
@@ -54,7 +55,7 @@ function App() {
 
         <div className={style.infoTasks}>
           <span>
-            Created tasks: <p>0</p>
+            Created tasks: <p>{tasks.length}</p>
           </span>
           <span>
             Completed: <p>0</p>
@@ -65,13 +66,13 @@ function App() {
       {tasks.length > 0 ? (
         <div>
           {tasks.map((task) => {
-            console.log(task);
             return <Post key={task.id} status={task.status} text={task.text} />;
           })}
         </div>
       ) : (
         <EmptyTask />
       )}
+      
     </>
   );
 }
