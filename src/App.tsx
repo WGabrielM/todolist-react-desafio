@@ -15,9 +15,14 @@ export interface MyTaskData {
 function App() {
   const [tasks, setTasks] = useState<MyTaskData[]>([]);
   const [value, setValue] = useState("");
+  const [checkedTasksCounter, setCheckedTasksCounter] = useState(0);
+  
+
+  function countChecked(count: number) {
+    setCheckedTasksCounter(count);
+  }
 
   function handleCreateNewTask(event: FormEvent) {
-    
     event.preventDefault();
 
     const newTask: MyTaskData = {
@@ -35,20 +40,19 @@ function App() {
   }
 
   function handleRemoveTask(id: number) {
-    const filteredTasks = tasks.filter((task) => task.id !== id)
+    const filteredTasks = tasks.filter((task) => task.id !== id);
 
-    if (!confirm('Are you sure you want delete this task?')) {
-      return
+    if (!confirm("Are you sure you want delete this task?")) {
+      return;
     }
 
-    setTasks(filteredTasks)
+    setTasks(filteredTasks);
   }
 
   const isNewTaskEmpty = value.length === 0;
 
   return (
     <>
-
       <Header />
 
       <article className={style.todo}>
@@ -70,7 +74,7 @@ function App() {
             Created tasks: <p>{tasks.length}</p>
           </span>
           <span>
-            Completed: <p>0</p>
+            Completed: <p>{checkedTasksCounter}</p>
           </span>
         </div>
       </article>
@@ -78,13 +82,21 @@ function App() {
       {tasks.length > 0 ? (
         <div>
           {tasks.map((task) => {
-            return <Post key={task.id} id={task.id} status={task.status} text={task.text} removeTask={handleRemoveTask} />;
+            return (
+              <Post
+                key={task.id}
+                id={task.id}
+                status={task.status}
+                text={task.text}
+                checkedTasksCounter={countChecked}
+                removeTask={handleRemoveTask}
+              />
+            );
           })}
         </div>
       ) : (
         <EmptyTask />
       )}
-      
     </>
   );
 }

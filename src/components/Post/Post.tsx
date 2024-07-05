@@ -7,18 +7,30 @@ export interface PostType {
   id: number;
   text: string;
   status: boolean;
+  checkedTasksCounter: (count: number) => void;
   removeTask: (id: number) => void;
 }
 
-export default function Post({ id, status, text, removeTask }: PostType) {
+export default function Post({
+  id,
+  status,
+  text,
+  checkedTasksCounter,
+  removeTask,
+}: PostType) {
   const [check, setCheck] = useState(status);
-
+  let countCheckedTask: number;
+  
   function handleTaskToggle() {
-    setCheck(!check)
+    setCheck(!check);
+
+    checkedTasksCounter(!check ? countCheckedTask++ : countCheckedTask--)
+    console.log(countCheckedTask);
+    
   }
 
   function handleRemoveTask() {
-    removeTask(id)
+    removeTask(id);
   }
 
   const checkboxCheckedClassname = check
