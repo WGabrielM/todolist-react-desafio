@@ -16,11 +16,6 @@ function App() {
   const [tasks, setTasks] = useState<MyTaskData[]>([]);
   const [value, setValue] = useState("");
   const [checkedTasksCounter, setCheckedTasksCounter] = useState(0);
-  
-
-  function countChecked(count: number) {
-    setCheckedTasksCounter(count);
-  }
 
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault();
@@ -46,7 +41,26 @@ function App() {
       return;
     }
 
+    const taskToRemove = tasks.find((task) => task.id === id);
+    if (taskToRemove && taskToRemove.status) {
+      setCheckedTasksCounter((count) => count - 1);
+    }
+
     setTasks(filteredTasks);
+  }
+
+  function handleToggleTaskStatus(id: number, newStatus: boolean) {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, status: newStatus } : task
+    );
+
+    setTasks(updatedTasks);
+
+    if (newStatus) {
+      setCheckedTasksCounter((count) => count + 1);
+    } else {
+      setCheckedTasksCounter((count) => count - 1);
+    }
   }
 
   const isNewTaskEmpty = value.length === 0;
@@ -88,7 +102,7 @@ function App() {
                 id={task.id}
                 status={task.status}
                 text={task.text}
-                checkedTasksCounter={countChecked}
+                onToggleStatus={handleToggleTaskStatus}
                 removeTask={handleRemoveTask}
               />
             );

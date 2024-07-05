@@ -7,7 +7,7 @@ export interface PostType {
   id: number;
   text: string;
   status: boolean;
-  checkedTasksCounter: (count: number) => void;
+  onToggleStatus: (id: number, newStatus: boolean) => void;
   removeTask: (id: number) => void;
 }
 
@@ -15,18 +15,15 @@ export default function Post({
   id,
   status,
   text,
-  checkedTasksCounter,
+  onToggleStatus,
   removeTask,
 }: PostType) {
   const [check, setCheck] = useState(status);
-  let countCheckedTask: number;
-  
-  function handleTaskToggle() {
-    setCheck(!check);
 
-    checkedTasksCounter(!check ? countCheckedTask++ : countCheckedTask--)
-    console.log(countCheckedTask);
-    
+  function handleTaskToggle() {
+    const newStatus = !check;
+    setCheck(newStatus);
+    onToggleStatus(id, newStatus);
   }
 
   function handleRemoveTask() {
@@ -44,7 +41,7 @@ export default function Post({
       <label htmlFor="checkbox" onClick={handleTaskToggle}>
         <input readOnly type="checkbox" checked={check} />
         <span className={`${style.checkbox} ${checkboxCheckedClassname}`}>
-          {status && <Check size={12} />}
+          {check && <Check size={12} />}
         </span>
 
         <p className={`${style.text} ${paragraphCheckedClassname}`}>{text}</p>
